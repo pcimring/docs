@@ -1087,11 +1087,19 @@ Along the way you will explore the following concepts:
             {"messages": [{"role": "user", "content": content}]},
             config={"configurable": {"thread_id": "great-gatsby-da"}},
         )
-        print(agent_result["messages"][-1].content_blocks)
+        for block in agent_result["messages"][-1].content_blocks:
+            if block["type"] == "text":
+                print(block["text"])
         print("\n")
-        print(deep_agent_result["messages"][-1].content_blocks)
+        for block in deep_agent_result["messages"][-1].content_blocks:
+            if block["type"] == "text":
+                print(block["text"])
         ```
         :::
+
+        <Note>
+            Some models emit a reasoning block in `content_blocks` alongside the answer, carrying an opaque, signed payload. Filtering to `text` skips it.
+        </Note>
 
         :::js
 
@@ -1231,9 +1239,13 @@ Along the way you will explore the following concepts:
             {"messages": [{"role": "user", "content": content}]},
             config={"configurable": {"thread_id": "great-gatsby-da"}},
         )
-        print(agent_result["messages"][-1].content_blocks)
+        for block in agent_result["messages"][-1].content_blocks:
+            if block["type"] == "text":
+                print(block["text"])
         print("\n")
-        print(deep_agent_result["messages"][-1].content_blocks)
+        for block in deep_agent_result["messages"][-1].content_blocks:
+            if block["type"] == "text":
+                print(block["text"])
         ```
         :::
 
